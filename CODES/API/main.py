@@ -1,38 +1,39 @@
 # Import fundamental libraries
-import uvicorn
-from prophet.serialize import model_from_json
-from functions import format_prophet
-from fastapi import FastAPI
-from typing import Union
-import warnings
-
-# Warning about future deprecation of pandas function
-warnings.filterwarnings("ignore", category=FutureWarning, module="prophet")
+from typing import Dict
+from fastapi import FastAPI, Request
+from models.total_sales import predict_pipeline
+from models.total_sales import __version__ as total_sales_model_version
+from http import HTTPStatus
 
 app = FastAPI()
 
+
+def format_response(data):
+    response = {
+        "message": HTTPStatus.OK.phrase,
+        "status-code": HTTPStatus.OK,
+        "data": data
+    }
+    return response
+
+
 @app.get("/")
-def home():
-    return {"Welcome": 'User'}
+def home() -> Dict:
+    data = {
+        "total_sales_model_version": total_sales_model_version
+    }
+    response = format_response(data)
+    return response
 
 
 @app.get('/sales/{weeks}')
-def future_sales(weeks: int):
-    # Load model
-    with open('../../OUTPUT/MODELS/total_sell_serialized_model.json', 'r') as fin:
-        fitted_model_PROPHET = model_from_json(fin.read())  # Load model
+def future_sales(weeks: int) -> Dict:
+    predictions = predict_pipeline(weeks)
+    data = {
+        "predictions": predictions
+    }
+    response = format_response(data)
+    return response
 
-    # Create a future dataframe for making predictions (half year)
-    # Dataframe include previous dates (prophet format)
-    future = fitted_model_PROPHET.make_future_dataframe(periods=weeks, freq='W-SUN')
-
-    # Use the fitted model to make predictions on the future dataframe
-    forecast = fitted_model_PROPHET.predict(future)
-
-    # Format the Prophet forecast data
-    predictions_ready = format_prophet(forecast, weeks)
-
-    return predictions_ready
-
-#if __name__ == "__main__":
+# if __name__ == "__main__":
 #    uvicorn.run(app, host="127.0.0.1", port=8000)

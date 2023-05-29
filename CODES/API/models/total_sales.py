@@ -1,13 +1,18 @@
 import pandas as pd
-import re
 from pathlib import Path
 from prophet.serialize import model_from_json
+import warnings
 
-__version__ "0.1.0"
+# Warning about future deprecation of pandas function
+warnings.filterwarnings("ignore", category=FutureWarning, module="prophet")
+
+__version__ = "0.1.0"
 
 BASE_DIR = Path(__file__).resolve(strict=True).parent
 
-
+# Load model
+with open(f'{BASE_DIR}/total_sales_trained-{__version__}.json', 'r') as fin:
+    fitted_model_PROPHET = model_from_json(fin.read())  # Load model
 
 
 def format_prophet(forecast, periods, freq='W-SUN', cvs_name='prediction'):
@@ -41,3 +46,27 @@ def format_prophet(forecast, periods, freq='W-SUN', cvs_name='prediction'):
     prediction_formated.index.freq = freq
 
     return prediction_formated
+
+
+def predict_pipeline(weeks):
+    """
+    Make a prediction using the previously fitted Prophet model.
+
+    Parameters:
+        weeks (int): Number of weeks into the future to make the prediction.
+
+    Returns:
+        pandas.DataFrame: Dataframe with the predictions ready for use.
+
+    """
+    # Create a future dataframe for making predictions (half year)
+    # Dataframe include previous dates (prophet format)
+    future = fitted_model_PROPHET.make_future_dataframe(periods=weeks, freq='W-SUN')
+
+    # Use the fitted model to make predictions on the future dataframe
+    forecast = fitted_model_PROPHET.predict(future)
+
+    # Format the Prophet forecast data
+    predictions_ready = format_prophet(forecast, weeks)
+
+    return predictions_ready
