@@ -1,8 +1,8 @@
 # Import fundamental libraries
 from typing import Dict
 from fastapi import FastAPI, Request
-from models.total_sales import predict_pipeline
-from models.total_sales import __version__ as total_sales_model_version
+from app.models.total_sales import predict_pipeline
+from app.models.total_sales import __version__ as total_sales_model_version
 from http import HTTPStatus
 
 app = FastAPI()
