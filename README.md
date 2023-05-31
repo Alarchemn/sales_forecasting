@@ -6,4 +6,5 @@ This folder contains a CSV file with the historical records of the company's tot
 
 ## CODES
 `models_evaluation.ipynb`
+
 The "models_evaluation.ipynb" Jupyter Notebook compares and evaluates four different prediction models based on time series analysis. The notebook analyzes the data in more detail, looking for seasonality, trends, moving averages, etc. All resulting plots and visualizations are saved in the OUTPUT folder.
