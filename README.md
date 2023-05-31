@@ -1,5 +1,5 @@
 # Overview
-The sales_forecasting project aims to predict the future sales of a company that is venturing into data science. It focuses on leveraging machine learning techniques for sales forecasting. The project is divided into three main folders: DATA, CODES, and OUTPUT.
+This project aims to predict the future sales of a company that is venturing into data science. It focuses on leveraging machine learning techniques for sales forecasting. The project is divided into three main folders: DATA, CODES, and OUTPUT.
 
 # DATA
 This folder contains a CSV file with the historical records of the company's total sales. For privacy reasons, sensitive information such as branch, salesperson, and customer details have been removed.
