@@ -20,4 +20,4 @@ The Dockerfile provided allows for the creation of a Docker image for easy deplo
 ## OUTPUT
 The OUTPUT folder stores the generated graphs, the serialized model, and a CSV file containing the predictions.
 
-** Please refer to the individual files and folders for more detailed information and instructions on running the project. **
+**Please refer to the individual files and folders for more detailed information and instructions on running the project.**
