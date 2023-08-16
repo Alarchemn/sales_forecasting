@@ -1,10 +1,16 @@
-# Overview
+## Overview
 This project aims to predict the future sales of a company that is venturing into data science. It focuses on leveraging machine learning techniques for sales forecasting. The project is divided into three main folders: DATA, CODES, and OUTPUT.
 
-# DATA
+## Architecture
+![sales-forecasting.png](FIGURES/sales-forecasting.png)
+### note
+This repository corresponds to the blue box.
+
+
+## Data
 This folder contains a CSV file with the historical records of the company's total sales. For privacy reasons, sensitive information such as branch, salesperson, and customer details have been removed.
 
-# CODES
+## Codes
 ### models_evaluation.ipynb
 The "models_evaluation.ipynb" Jupyter Notebook compares and evaluates four different prediction models based on time series analysis. The notebook analyzes the data in more detail, looking for seasonality, trends, moving averages, etc. All resulting plots and visualizations are saved in the OUTPUT folder.
 
@@ -21,7 +27,7 @@ The Dockerfile provided allows for the creation of a Docker image for easy deplo
 
 You can build the docker image with the command: `docker build -t sales_api_image .` and run it with: `docker run -d --name sales_api -p 80:80 sales_api_image`
 
-# OUTPUT
+## Output
 The OUTPUT folder stores the generated graphs, the serialized model, and a CSV file containing the predictions.
 
 **Please refer to the individual files and folders for more detailed information and instructions on running the project.**
