@@ -3,7 +3,7 @@ This project aims to predict the future sales of a company that is venturing int
 
 ## Architecture
 ![sales-forecasting.png](FIGURES/sales-forecasting.png)
-### note
+### Note
 This repository corresponds to the blue box.
 
 
